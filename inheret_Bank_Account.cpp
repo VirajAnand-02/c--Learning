@@ -1,4 +1,5 @@
 #include<iostream>
+#include <math.h>
 using namespace std;
 
 class Account {
@@ -38,6 +39,12 @@ protected:
     }
 };
 
+
+class Check {
+
+};
+
+
 class curr_acct : public Account {
 private:
     bool warned = false;
@@ -71,7 +78,9 @@ public:
     double minBalanceRequired = 1000.00;
 
     // checkbook feature
+    virtual void checkInto(curr_acct checkerAccount, Check check) {
 
+    }
 
 
 protected:
@@ -80,10 +89,26 @@ protected:
     }
 };
 
+
 class sav_acct : public Account {
-    // Compound intrest feature
-    // compute and deposite intrest
+private:
+    float intrestRater = 0.7;
+    float n_compoundsPerYear = 4;
+    double compoundIntrest(float time_year = 1.0f) {
+        return balance * pow((1 + intrestRater / n_compoundsPerYear), (n_compoundsPerYear * time_year));
+    }
+
 public:
+    void setIntrestRate(float intrest) {
+        intrestRater = intrest;
+    }
+    // Compound intrest feature 
+
+    // compute and deposite intrest | DONE CALCULATION |
+    void depositeIntrest() {
+        balance = compoundIntrest();
+    }
+
     sav_acct() {
         acc_type = "current";
     }

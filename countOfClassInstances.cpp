@@ -10,7 +10,7 @@ class Count{
     ~Count(){
         counter--;
     }
-    static int getObjCount(){
+    const static int getObjCount(){
         cout << "total no of object instance : " << counter;
         return counter;
     }
